@@ -16,7 +16,7 @@
 
 # 状态
  - USB定制了后面板USB、Type c、前置USB3.0、主板usb2.0接口1
- - AppleALC 897参考 [R-a-s-c-a-l的配置](https://github.com/R-a-s-c-a-l/MSI-MAG-B560M-i7-11700/issues/1)
+ - AppleALC 897参考 [R-a-s-c-a-l的配置](https://github.com/R-a-s-c-a-l/MSI-MAG-B560M-i7-11700/issues/1),无修改，使用了原版
  - Wi-Fi 蓝牙 (没放驱动)，使用了小齐家的四天线BCM94360CD。最开始用FV T919发现无线信号差，速率只有200Mbps，退了。
  - 睡眠功能没有需求，就直接把电脑设置为永不睡眠。
  - SMBIOS MacPro 7,1
