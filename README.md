@@ -15,7 +15,7 @@
 
 
 
-# 状态
+## 状态
  - USB定制了后面板USB、Type c、前置USB3.0、主板usb2.0接口1
  - AppleALC 897参考 [R-a-s-c-a-l的配置](https://github.com/R-a-s-c-a-l/MSI-MAG-B560M-i7-11700/issues/1),无修改，使用了原版
  - Wi-Fi 蓝牙 (没放驱动)，使用了小齐家的四天线BCM94360CD。最开始用FV T919发现无线信号差，速率只有200Mbps，退了。
@@ -24,8 +24,15 @@
  - 睡眠功能没有需求，就直接把电脑设置为永不睡眠。
  - SMBIOS MacPro 7,1
 
+## 说明
 
+### AppleALC 897
+AppleALC组件使用了原版方案，使用`device-id=D07A0000`、`layout-id=66`等参数。
 
+<img src="./img/iShot2022-02-25%2016.06.17.png" alt="iShot2022-02-25 16.06.17" style="zoom:50%;" />
+
+----------------
+### 展示
 <img src="./img/iShot2022-02-25%2013.06.24.png" alt="iShot2022-02-25 13.06.24" style="zoom:50%;" />
 
 <img src="./img/iShot2022-02-25%2013.06.35.png" alt="iShot2022-02-25 13.06.35" style="zoom:50%;" />
@@ -35,6 +42,11 @@
 <img src="./img/iShot2022-02-25%2013.07.09.png" alt="iShot2022-02-25 13.07.09" style="zoom:50%;" />
 
 <img src="./img/iShot2022-02-25%2013.12.52.png" alt="iShot2022-02-25 13.12.52" style="zoom:50%;" />
+
+<img src="./img/iShot2022-02-25%2016.06.37.png" alt="iShot2022-02-25 16.06.37" style="zoom:50%;" />
+
+----------------
+## 鸣谢
 
 \- [Mieze](https://github.com/Mieze) 提供 [LucyRTL8125Ethernet](https://github.com/Mieze/LucyRTL8125Ethernet).
 
