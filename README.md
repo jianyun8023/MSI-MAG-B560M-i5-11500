@@ -33,6 +33,39 @@ AppleALC组件使用了原版方案，使用`device-id=D07A0000`、`layout-id=66
 
 ----------------
 ### 展示
+
+
+```
+EFI
+├── BOOT
+│   └── BOOTx64.efi
+└── OC
+    ├── ACPI
+    │   ├── SSDT-AWAC-DISABLE.aml
+    │   ├── SSDT-EC-USBX.aml
+    │   ├── SSDT-PLUG.aml
+    │   └── SSDT-SBUS-MCHC.aml
+    ├── Drivers
+    │   ├── ExFatDxe.efi
+    │   ├── HfsPlus.efi
+    │   ├── OpenCanopy.efi
+    │   └── OpenRuntime.efi
+    ├── Kexts
+    │   ├── AppleALC.kext
+    │   ├── Lilu.kext
+    │   ├── LucyRTL8125Ethernet.kext
+    │   ├── RestrictEvents.kext
+    │   ├── SMCProcessor.kext
+    │   ├── SMCSuperIO.kext
+    │   ├── USBMap.kext
+    │   ├── VirtualSMC.kext
+    │   └── WhateverGreen.kext
+    ├── OpenCore.efi
+    └── config.plist
+
+14 directories, 11 files
+```
+
 <img src="./img/iShot2022-02-25%2013.06.24.png" alt="iShot2022-02-25 13.06.24" style="zoom:50%;" />
 
 <img src="./img/iShot2022-02-25%2013.06.35.png" alt="iShot2022-02-25 13.06.35" style="zoom:50%;" />
