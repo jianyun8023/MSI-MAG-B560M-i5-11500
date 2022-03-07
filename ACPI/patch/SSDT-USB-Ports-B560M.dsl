@@ -1,7 +1,7 @@
 /*
  * USB map.
  */
-DefinitionBlock ("", "SSDT", 2, "ssss", "USB-Map", 0x00000000)
+DefinitionBlock ("", "SSDT", 2, "ACDT", "USB-Map", 0x00000000)
 {
     External (_SB_.PC00.XHCI, DeviceObj)
     External (_SB_.PC00.XHCI.RHUB, DeviceObj)
