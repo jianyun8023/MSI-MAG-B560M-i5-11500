@@ -1,17 +1,17 @@
 # MSI-MAG-B560M-i5-11500
 
-|            |                                                           |
-| --------   | --------------------------------------------------------- |
-| Mobo       | MSI-MAG-B560-MORTAR-WIFI                                  |
-| CPU        | Intel(R) Core(TM) i5-11500                                |
-| RAM        | Kingston DDR4 3200  32GBx2                                |
-| GPU        | ONDA Radeon RX 560 典范 4GD5                               |
-| Network    | Realtek PCIe 2.5Gb Ethernet (RTL8125)                     |
-| WIFI       | BCM94360CD                                                |
-| Disk       | WD SN850 PCIE 4.0                                         |
-| Input      | Apple Magic Trackpad 2                                    |
-| Bootloader | OpenCore 0.7.8 Release                                    |
-| System     | macOS 12.2.1                                              |
+|            |                                       |
+| --------   |---------------------------------------|
+| Mobo       | MSI-MAG-B560-MORTAR-WIFI              |
+| CPU        | Intel(R) Core(TM) i5-11500            |
+| RAM        | Kingston DDR4 3200  32GBx2            |
+| GPU        | ONDA Radeon RX 560 典范 4GD5            |
+| Network    | Realtek PCIe 2.5Gb Ethernet (RTL8125) |
+| WIFI       | BCM94360CD                            |
+| Disk       | WD SN850 PCIE 4.0                     |
+| Input      | Apple Magic Trackpad 2                |
+| Bootloader | OpenCore 0.7.9 Release                |
+| System     | macOS 12.2.1                          |
 
 
 
@@ -21,8 +21,13 @@
  - Wi-Fi 蓝牙 (没放驱动)，使用了小齐家的四天线BCM94360CD。最开始用FV T919发现无线信号差，速率只有200Mbps，退了。
  - AirDrop、AirPods自动切换、iWatch解锁、屏幕镜像到AirPlay设备、Airplay投射到本设备功能正常。这些功能依赖于苹果原装网卡和蓝牙。
  - 使用Apple Magic Trackpad 2作为输入可以带来刚好的操作体验
- - 睡眠功能没有需求，就直接把电脑设置为永不睡眠。
+ - 睡眠唤醒功能正常
  - SMBIOS MacPro 7,1
+
+## changelog
+### 2022.03.11
+- 解决了睡眠问题，可以正常睡眠唤醒，在bios中禁用了核显。暂时没搞定ssdt方式禁用核显
+- 增加 SSDT-USBW.aml 和 USBWakeFixup.kext 解决usb唤醒。
 
 ## 说明
 
@@ -32,11 +37,11 @@
 
   发现HS02接口是该主板的内置蓝牙HCI，增加了屏蔽。避免干扰免驱卡蓝牙。
 
-<img src="img//image-20220304155726895.png" alt="image-20220304155726895" style="zoom:50%;" />
+<img src="img/image-20220304155726895.png" alt="image-20220304155726895" style="zoom:50%;" />
 
 当前USB定制展示
 
-<img src="img//image-20220304161421059.png" alt="image-20220304161421059" style="zoom:50%;" />
+<img src="img/image-20220304161421059.png" alt="image-20220304161421059" style="zoom:50%;" />
 
 | 名称 | 类型          | 说明                                 |
 | ---- | ------------- | ------------------------------------ |
@@ -58,17 +63,16 @@
 
 
 
-
 - 使用USBMap定制USB可以参考 release v1.0版本中的 USBMap.kext
 
-<img src="./img/iShot2022-02-25%2013.06.48.png" alt="iShot2022-02-25 13.06.48" style="zoom:50%;" />
+<img src="img/iShot2022-02-25%2013.06.48.png" alt="iShot2022-02-25 13.06.48" style="zoom:50%;" />
 
 
 
 ### AppleALC 897
 AppleALC组件使用了原版方案，使用`device-id=D07A0000`、`layout-id=66`等参数。
 
-<img src="./img/iShot2022-02-25%2016.06.17.png" alt="iShot2022-02-25 16.06.17" style="zoom:50%;" />
+<img src="img/iShot2022-02-25%2016.06.17.png" alt="iShot2022-02-25 16.06.17" style="zoom:50%;" />
 
 ----------------
 ### 展示
@@ -84,6 +88,7 @@ EFI
     │   ├── SSDT-EC-USBX.aml
     │   ├── SSDT-PLUG.aml
     │   ├── SSDT-SBUS-MCHC.aml
+    │   ├── SSDT-USBW.aml
     │   └── SSDT-USB-Ports-B560M.aml
     ├── Drivers
     │   ├── ExFatDxe.efi
@@ -98,23 +103,23 @@ EFI
     │   ├── SMCProcessor.kext
     │   ├── SMCSuperIO.kext
     │   ├── VirtualSMC.kext
-    │   └── WhateverGreen.kext
+    │   ├── WhateverGreen.kext
+    │   └── USBWakeFixup.kext
     ├── OpenCore.efi
     └── config.plist
 
-13 directories, 12 files
+14 directories, 13 files
 ```
 
-<img src="./img/iShot2022-02-25%2013.06.24.png" alt="iShot2022-02-25 13.06.24" style="zoom:50%;" />
+<img src="img/iShot2022-02-25%2013.06.24.png" alt="iShot2022-02-25 13.06.24" style="zoom:50%;" />
 
-<img src="./img/iShot2022-02-25%2013.06.35.png" alt="iShot2022-02-25 13.06.35" style="zoom:50%;" />
+<img src="img/iShot2022-02-25%2013.06.35.png" alt="iShot2022-02-25 13.06.35" style="zoom:50%;" />
 
+<img src="img/iShot2022-02-25%2013.07.09.png" alt="iShot2022-02-25 13.07.09" style="zoom:50%;" />
 
-<img src="./img/iShot2022-02-25%2013.07.09.png" alt="iShot2022-02-25 13.07.09" style="zoom:50%;" />
+<img src="img/iShot2022-02-25%2013.12.52.png" alt="iShot2022-02-25 13.12.52" style="zoom:50%;" />
 
-<img src="./img/iShot2022-02-25%2013.12.52.png" alt="iShot2022-02-25 13.12.52" style="zoom:50%;" />
-
-<img src="img//image-20220304161650335.png" alt="image-20220304161650335" style="zoom:50%;" />
+<img src="img/image-20220304161650335.png" alt="image-20220304161650335" style="zoom:50%;" />
 
 ----------------
 ## 鸣谢
