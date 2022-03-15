@@ -11,7 +11,7 @@
 | Disk       | WD SN850 PCIE 4.0                     |
 | Input      | Apple Magic Trackpad 2                |
 | Bootloader | OpenCore 0.7.9 Release                |
-| System     | macOS 12.2.1                          |
+| System     | macOS 12.3                          |
 
 
 
