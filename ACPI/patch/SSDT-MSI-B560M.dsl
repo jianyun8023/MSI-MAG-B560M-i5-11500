@@ -46,6 +46,13 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "B560M", 0)
         PCKG [One] = Arg1
         Return (PCKG) /* \GUPC.PCKG */
     }
+    
+    //
+    // 060D path
+    // In config ACPI, GPRW to XPRW
+    // Find:     47505257 02
+    // Replace:  58505257 02
+    //
     Method (GPRW, 2, NotSerialized)
     {
         If (_OSI ("Darwin"))
@@ -105,7 +112,10 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "B560M", 0)
 
     Scope (\_SB)
     {
-      
+        
+        /*
+         * XCPM power management compatibility table.
+         */
         If ((ObjectType (\_SB.PR00) == 0x0C))
         {
             Scope (PR00)
@@ -138,6 +148,8 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "B560M", 0)
                 }
             }
         }
+        
+        /* add apple MCHC */
         Device (MCHC)
         {
             Name (_ADR, Zero)  // _ADR: Address
@@ -224,6 +236,8 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "B560M", 0)
                 }
             }
         }
+        
+        /* add apple EC */
         Device (EC)
         {
             Name (_HID, "ACID0001")  // _HID: Hardware ID
@@ -241,6 +255,7 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "B560M", 0)
         }
     }
     
+    /* add apple SBUS */
     Device (SBUS.BUS0)
     {
         Name (_CID, "smbus")  // _CID: Compatible ID
@@ -281,6 +296,7 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "B560M", 0)
         
         
        }
+    /* disable intel gpu */
     Scope (GFX0)
     {
         If (_OSI ("Darwin"))
@@ -330,6 +346,8 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "B560M", 0)
             }
         }
     }
+    
+    /* Custom usb interface */
     Scope (XHCI)
     {
         Scope (RHUB)
@@ -726,6 +744,7 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "B560M", 0)
     
     }
 
+        
         Device (USBX)
         {
             Name (_ADR, Zero)  // _ADR: Address
@@ -764,6 +783,8 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "B560M", 0)
                 }
             }
         }
+        
+        /* fix usb wakeup */
         If (_OSI ("Darwin"))
         {
         Device (USBW)
@@ -779,6 +800,7 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "B560M", 0)
     
     }
 
+    /* add apple MEM2 */
     Device (MEM2)
     {
         Name (_HID, EisaId ("PNP0C01"))
