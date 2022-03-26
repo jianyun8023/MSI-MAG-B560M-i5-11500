@@ -16,15 +16,22 @@
 
 
 ## 状态
- - USB定制了前后面板USB、Type c、主板usb。
- - AppleALC 897参考 [R-a-s-c-a-l的配置](https://github.com/R-a-s-c-a-l/MSI-MAG-B560M-i7-11700/issues/1),无修改，使用了原版
- - Wi-Fi 蓝牙 (没放驱动)，使用了小齐家的四天线BCM94360CD。最开始用FV T919发现无线信号差，速率只有200Mbps，退了。
+ - USB定制了前后面板USB、Type-C、主板USB。
+ - AppleALC 897参考 [R-a-s-c-a-l的配置](https://github.com/R-a-s-c-a-l/MSI-MAG-B560M-i7-11700/issues/1),无修改，使用了原版方案
+ - Wi-Fi 蓝牙 (免驱)，使用小齐家的四天线BCM94360CD。最开始用FV T919发现无线信号差，速率只有200Mbps，退了。
  - AirDrop、AirPods自动切换、iWatch解锁、屏幕镜像到AirPlay设备、Airplay投射到本设备功能正常。这些功能依赖于苹果原装网卡和蓝牙。
  - 使用Apple Magic Trackpad 2作为输入可以带来刚好的操作体验
- - 睡眠唤醒功能正常
+ - 睡眠唤醒功能半正常，存在USB导致的秒醒问题。
  - SMBIOS MacPro 7,1
 
 ## changelog
+
+### 2022.03.26
+- 通过SSDT方式禁用核显，不需要在BIOS中禁用核显
+- 补全了Apple SSDT中的一些设备
+- 合并多个SSDT patch
+- 睡眠仍存在秒醒问题，可以确定是USB导致的，目前还不能完美解决。可以在BIOS禁用USB设备唤醒来避免秒醒问题。
+
 ### 2022.03.11
 - 解决了睡眠问题，可以正常睡眠唤醒，在bios中禁用了核显。暂时没搞定ssdt方式禁用核显
 - 增加 SSDT-USBW.aml 和 USBWakeFixup.kext 解决usb唤醒。
@@ -34,6 +41,7 @@
 ### USB定制
 
 - 更新使用SSDT方式定制USB在xhci中增加MacOS系统使用节点,无需屏蔽acpi表。同时也不影响其他系统对USB的识别。
+  > update: 排查bootlog，发现启动加载 USB Table (SSDT-5-xh_rksu4.aml Table)是失败的，所以这个表可屏蔽可不屏蔽。反正都不会加载。
 
   发现HS02接口是该主板的内置蓝牙HCI，增加了屏蔽。避免干扰免驱卡蓝牙。
 
@@ -84,12 +92,7 @@ EFI
 │   └── BOOTx64.efi
 └── OC
     ├── ACPI
-    │   ├── SSDT-AWAC-DISABLE.aml
-    │   ├── SSDT-EC-USBX.aml
-    │   ├── SSDT-PLUG.aml
-    │   ├── SSDT-SBUS-MCHC.aml
-    │   ├── SSDT-USBW.aml
-    │   └── SSDT-USB-Ports-B560M.aml
+    │   └── SSDT-MSI-B560M.aml
     ├── Drivers
     │   ├── ExFatDxe.efi
     │   ├── HfsPlus.efi
@@ -99,16 +102,18 @@ EFI
     │   ├── AppleALC.kext
     │   ├── Lilu.kext
     │   ├── LucyRTL8125Ethernet.kext
+    │   ├── RadeonSensor.kext
     │   ├── RestrictEvents.kext
     │   ├── SMCProcessor.kext
+    │   ├── SMCRadeonGPU.kext
     │   ├── SMCSuperIO.kext
+    │   ├── USBWakeFixup.kext
     │   ├── VirtualSMC.kext
-    │   ├── WhateverGreen.kext
-    │   └── USBWakeFixup.kext
+    │   └── WhateverGreen.kext
     ├── OpenCore.efi
     └── config.plist
 
-14 directories, 13 files
+16 directories, 8 files
 ```
 
 <img src="img/iShot2022-02-25%2013.06.24.png" alt="iShot2022-02-25 13.06.24" style="zoom:50%;" />
