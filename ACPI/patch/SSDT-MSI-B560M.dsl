@@ -8,7 +8,6 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "B560M", 0)
     External (_SB.PC00, DeviceObj)
     External (_SB.PC00.SBUS, DeviceObj)
     External (_SB.PC00.LPCB, DeviceObj)
-    External (_SB.PC00.GFX0, DeviceObj)
     External (_SB.PC00.XHCI, DeviceObj)
     External (_SB.PC00.XHCI.RHUB, DeviceObj)
     External (_SB.PC00.XHCI._PRW, MethodObj)    // 0 Arguments
@@ -296,56 +295,7 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "B560M", 0)
         
         
        }
-    /* disable intel gpu */
-    Scope (GFX0)
-    {
-        If (_OSI ("Darwin"))
-        {
-            Name (_STA, Zero)  // _STA: Status
-            Device (^IGXE)
-            {
-                Name (_ADR, 0x00020000)  // _ADR: Address
-                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
-                {
-                    If ((Arg2 == Zero))
-                    {
-                        Return (Buffer (One)
-                        {
-                             0x03                                             // .
-                        })
-                    }
-
-                    Return (Package (0x0C)
-                    {
-                        "device-id", 
-                        Buffer (0x04)
-                        {
-                             0xFF, 0xFF, 0x00, 0x00                           // ....
-                        }, 
-
-                        "vendor-id", 
-                        Buffer (0x04)
-                        {
-                             0xFF, 0xFF, 0x00, 0x00                           // ....
-                        }, 
-
-                        "class-code", 
-                        Buffer (0x04)
-                        {
-                             0xFF, 0xFF, 0x00, 0x00                           // ....
-                        }, 
-
-                        "IOName", 
-                        "igpu_disabled", 
-                        "name", 
-                        "igpu_disabled", 
-                        "compatible", 
-                        "igpu_disabled"
-                    })
-                }
-            }
-        }
-    }
+    
     
     /* Custom usb interface */
     Scope (XHCI)

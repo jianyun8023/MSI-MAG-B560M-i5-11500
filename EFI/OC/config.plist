@@ -14,6 +14,14 @@
                     <key>Path</key>
                     <string>SSDT-MSI-B560M.aml</string>
                 </dict>
+                <dict>
+                    <key>Comment</key>
+                    <string></string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Path</key>
+                    <string>SSDT-DiGPU.aml</string>
+                </dict>
             </array>
             <key>Delete</key>
             <array>
@@ -523,6 +531,8 @@
                 <key>ApECID</key>
                 <integer>0</integer>
                 <key>AuthRestart</key>
+                <false/>
+                <key>BlacklistAppleUpdate</key>
                 <false/>
                 <key>DmgLoading</key>
                 <string>Signed</string>
