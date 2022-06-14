@@ -10,8 +10,8 @@
 | WIFI       | BCM94360CD                            |
 | Disk       | WD SN850 PCIE 4.0                     |
 | Input      | Apple Magic Trackpad 2                |
-| Bootloader | OpenCore 0.7.9 Release                |
-| System     | macOS 12.3                          |
+| Bootloader | OpenCore 0.8.1 Release                |
+| System     | macOS 12.4                          |
 
 
 
