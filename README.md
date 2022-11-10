@@ -10,8 +10,8 @@
 | WIFI       | BCM94360CD                            |
 | Disk       | WD SN850 PCIE 4.0                     |
 | Input      | Apple Magic Trackpad 2                |
-| Bootloader | OpenCore 0.8.1 Release                |
-| System     | macOS 12.4                          |
+| Bootloader | OpenCore 0.8.5 Release                |
+| System     | macOS 13                              |
 
 
 
@@ -25,6 +25,10 @@
  - SMBIOS MacPro 7,1
 
 ## changelog
+
+### 2022.11.10
+- 常规升级到OC 0.8.5,可直升 macOS 13
+
 ### 2022.03.29
 - BIOS开启USB唤醒就会导致秒醒；禁用USB唤醒不会秒醒，但需要使用电源键唤醒。
 - SSDT方式禁用核显放为一个单独的文件，这样不需要使用的人可以不加载它。
